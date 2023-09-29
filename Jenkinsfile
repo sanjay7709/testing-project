@@ -8,8 +8,8 @@ pipeline {
 
         choice(name: "action", choices: 'create\ndestroy', description: 'choose your action')
         string(name: 'Imagename', description: 'enter the image name', defaultValue: 'webapp')
-        string(name: 'username', description: 'enter the image name', defaultValue: 'sanjay7709')
-        string(name: 'Imagetag', description: 'enter the image name', defaultValue: 'v1')
+        string(name: 'username', description: 'enter the username', defaultValue: 'sanjay7709')
+        string(name: 'Imagetag', description: 'enter the image tag', defaultValue: 'v1')
     }
 
     stages{
