@@ -4,7 +4,7 @@ pipeline {
 
     agent any
 
-    parameters{}
+    parameters{
 
         choice(name: "action", choices: 'create\ndestroy', decription: 'choose your action')
     }
