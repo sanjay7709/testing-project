@@ -1,4 +1,4 @@
-@my-first-project _
+@ my-first-project _
 
 pipeline {
 
