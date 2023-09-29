@@ -72,6 +72,14 @@ pipeline {
                     dockerBuild("${params.Imagename}","${params.username}","${params.Imagetag}")
                 }
             }
-         }         
+         }  
+        stage('docker image push'){
+        when { expression { params.action == 'create'}}
+            steps{
+                script {
+                    dockerPush("${params.Imagename}","${params.username}","${params.Imagetag}")
+                }
+            }
+         }       
     }
 }
