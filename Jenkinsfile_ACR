@@ -1,0 +1,94 @@
+@Library('my-first-project') _
+
+pipeline {
+
+    agent any
+
+    parameters{
+
+        choice(name: "action", choices: 'create\ndestroy', description: 'choose your action')
+        string(name: 'Imagename', description: 'enter the image name', defaultValue: 'webapp')
+        string(name: 'username', description: 'enter the username', defaultValue: 'sanjay7709')
+        string(name: 'Imagetag', description: 'enter the image tag', defaultValue: 'v1')
+        string(name: 'ACR_LOGINSERVER', description: 'enter the login server', defaultVaule: 'azusanacr01.azurecr.io')
+    }
+
+    stages{
+
+        stage('git checkout'){
+            when { expression { params.action == 'create'}}
+            steps{
+                gitCheckout(
+                    branch: "main",
+                    url: "https://github.com/sanjay7709/testing-project.git"
+                )
+            }
+         }
+        stage('unit-testing'){
+        when { expression { params.action == 'create'}}
+            steps{
+                script {
+                    mvnTest()
+                }
+            }
+         }
+        stage('maven integration testing'){
+         when { expression { params.action == 'create'}}
+            steps{
+                script {
+                    mvnIntegrationtest()
+                }
+            }
+         }
+        stage('sonar static code quality analysis'){
+        when { expression { params.action == 'create'}}
+            steps{
+                script {
+                    def sonarqubecreds = 'sonar-new'
+                    staticCode(sonarqubecreds)
+                }
+            }
+         }
+        stage('sonar quality gate check'){
+        when { expression { params.action == 'create'}}
+            steps{
+                script {
+                    def sonarcred = 'sonar-new'
+                    qualityGate(sonarcred)
+                }
+            }
+         } 
+        stage('maven build'){
+        when { expression { params.action == 'create'}}
+            steps{
+                script {
+                    mvnBuild()
+                }
+            }
+         } 
+        stage('docker image build: FOR ACR'){
+        when { expression { params.action == 'create'}}
+            steps{
+                script {
+                    dockerBuild("${params.Imagename}","${params.username}","${params.ACR_LOGINSERVER}","${params.Imagetag}")
+                }
+            }
+         }  
+        stage('docker image push'){
+        when { expression { params.action == 'create'}}
+            steps{
+                script {
+                    dockerPush("${params.Imagename}","${params.ACR_LOGINSERVER}","${params.username}","${params.Imagetag}")
+                }
+            }
+         }
+        stage('docker image clean up'){
+        when { expression { params.action == 'create'}}
+            steps{
+                script {
+                    dockerRemove("${params.Imagename}","${params.username}","${params.ACR_LOGINSERVER}","${params.Imagetag}")
+                }
+            }
+         }       
+    }
+} 
