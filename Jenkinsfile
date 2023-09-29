@@ -49,7 +49,7 @@ pipeline {
         when { expression { params.action == 'create'}}
             steps{
                 script {
-                    def sonarcred = 'sonar-n1'
+                    def sonarcred = 'sonar-new'
                     qualityGate(sonarcred)
                 }
             }
