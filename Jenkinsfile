@@ -7,6 +7,9 @@ pipeline {
     parameters{
 
         choice(name: "action", choices: 'create\ndestroy', description: 'choose your action')
+        string(name: 'Imagename', description: 'enter the image name', defaultValue: 'webapp')
+        string(name: 'username', description: 'enter the image name', defaultValue: 'sanjay7709')
+        string(name: 'Imagetag', description: 'enter the image name', defaultValue: 'v1')
     }
 
     stages{
@@ -59,6 +62,14 @@ pipeline {
             steps{
                 script {
                     mvnBuild()
+                }
+            }
+         }  
+        stage('docker image build'){
+        when { expression { params.action == 'create'}}
+            steps{
+                script {
+                    dockerBuild("${params.Imagename}","${params.username}","${params.Imagetag}")
                 }
             }
          }         
