@@ -53,6 +53,14 @@ pipeline {
                     qualityGate(sonarcred)
                 }
             }
-         }        
+         } 
+        stage('maven build'){
+        when { expression { params.action == 'create'}}
+            steps{
+                script {
+                    mvnBuild()
+                }
+            }
+         }         
     }
 }
