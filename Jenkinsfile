@@ -88,6 +88,6 @@ pipeline {
                     dockerRemove("${params.Imagename}","${params.username}","${params.Imagetag}")
                 }
             }
-         }       
+         }        
     }
 }

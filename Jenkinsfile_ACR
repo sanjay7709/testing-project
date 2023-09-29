@@ -89,6 +89,14 @@ pipeline {
                     dockerRemove("${params.Imagename}","${params.username}","${params.ACR_LOGINSERVER}","${params.Imagetag}")
                 }
             }
+         } 
+        stage('kubernetes deploy'){
+        when { expression { params.action == 'create'}}
+            steps{
+                script {
+                    kubernetesDeploy("${params.Imagename}","${params.username}","${params.ACR_LOGINSERVER}","${params.Imagetag}")
+                }
+            }
          }       
     }
 } 
