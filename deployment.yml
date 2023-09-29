@@ -1,11 +1,14 @@
 apiVersion: apps/v1
-kind: deployment
+kind: Deployment
 metadata:
   name: deploy01
-  matchLabels:
+  labels:
     app: web
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: web
   template:
     metadata:
       name: tomcat-pod
@@ -13,6 +16,7 @@ spec:
         app: web
     spec:
       containers:
+      - name: pod01
         image: ${ACR_LOGINSERVER}/${project}:${ImageTag}
         ports:
         - containerPort: 8080
