@@ -80,6 +80,14 @@ pipeline {
                     dockerPush("${params.Imagename}","${params.username}","${params.Imagetag}")
                 }
             }
+         }
+        stage('docker image clean up'){
+        when { expression { params.action == 'create'}}
+            steps{
+                script {
+                    dockerRemove("${params.Imagename}","${params.username}","${params.Imagetag}")
+                }
+            }
          }       
     }
 }
