@@ -44,6 +44,15 @@ pipeline {
                     staticCode(sonarqubecreds)
                 }
             }
+         }
+        stage('sonar quality gate check'){
+        when { expression { params.action == 'create'}}
+            steps{
+                script {
+                    def sonarcred = 'sonar-n1'
+                    qualityGate(sonarcred)
+                }
+            }
          }        
     }
 }
