@@ -1,4 +1,4 @@
-@ my-first-project _
+@Library('my-first-project') _
 
 pipeline {
 
