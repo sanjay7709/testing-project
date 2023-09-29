@@ -1,6 +1,6 @@
 FROM tomcat
 WORKDIR /app
-RUN cp -R /usr/local/tomcat/webapps.dist*/  /usr/local/tomcat/webapps/
+RUN cp -R /usr/local/tomcat/webapps.dist/*  /usr/local/tomcat/webapps/
 COPY target/*.war  /app/usr/local/tomcat/webapps/app.war
 
 
