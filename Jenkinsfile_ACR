@@ -10,7 +10,7 @@ pipeline {
         string(name: 'Imagename', description: 'enter the image name', defaultValue: 'webapp')
         string(name: 'username', description: 'enter the username', defaultValue: 'sanjay7709')
         string(name: 'Imagetag', description: 'enter the image tag', defaultValue: 'v1')
-        string(name: 'ACR_LOGINSERVER', description: 'enter the login server', defaultVaule: 'azusanacr01.azurecr.io')
+        string(name: 'ACR_LOGINSERVER', description: 'enter the login server', defaultValue: 'azusanacr01.azurecr.io')
     }
 
     stages{
