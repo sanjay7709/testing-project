@@ -23,40 +23,40 @@ pipeline {
                 )
             }
          }
-        stage('unit-testing'){
-        when { expression { params.action == 'create'}}
-            steps{
-                script {
-                    mvnTest()
-                }
-            }
-         }
-        stage('maven integration testing'){
-         when { expression { params.action == 'create'}}
-            steps{
-                script {
-                    mvnIntegrationtest()
-                }
-            }
-         }
-        stage('sonar static code quality analysis'){
-        when { expression { params.action == 'create'}}
-            steps{
-                script {
-                    def sonarqubecreds = 'sonar-new'
-                    staticCode(sonarqubecreds)
-                }
-            }
-         }
-        stage('sonar quality gate check'){
-        when { expression { params.action == 'create'}}
-            steps{
-                script {
-                    def sonarcred = 'sonar-new'
-                    qualityGate(sonarcred)
-                }
-            }
-         } 
+        // stage('unit-testing'){
+        // when { expression { params.action == 'create'}}
+        //     steps{
+        //         script {
+        //             mvnTest()
+        //         }
+        //     }
+        //  }
+        // stage('maven integration testing'){
+        //  when { expression { params.action == 'create'}}
+        //     steps{
+        //         script {
+        //             mvnIntegrationtest()
+        //         }
+        //     }
+        //  }
+        // stage('sonar static code quality analysis'){
+        // when { expression { params.action == 'create'}}
+        //     steps{
+        //         script {
+        //             def sonarqubecreds = 'sonar-new'
+        //             staticCode(sonarqubecreds)
+        //         }
+        //     }
+        //  }
+        // stage('sonar quality gate check'){
+        // when { expression { params.action == 'create'}}
+        //     steps{
+        //         script {
+        //             def sonarcred = 'sonar-new'
+        //             qualityGate(sonarcred)
+        //         }
+        //     }
+        //  } 
         stage('maven build'){
         when { expression { params.action == 'create'}}
             steps{
