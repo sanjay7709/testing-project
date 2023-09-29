@@ -1,3 +1,5 @@
+@my-first-project _
+
 pipeline {
 
     agent any
@@ -7,7 +9,10 @@ pipeline {
         stage('git checkout'){
             steps{
                 script{
-                    git branch: 'main', url: 'https://github.com/sanjay7709/testing-project'
+                    gitCheckout(
+                        branch: 'main'
+                        url: 'https://github.com/sanjay7709/testing-project.git'
+                    )
                 }
             }
          }
