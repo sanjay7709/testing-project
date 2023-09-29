@@ -8,12 +8,10 @@ pipeline {
 
         stage('git checkout'){
             steps{
-                script{
-                    gitCheckout(
-                        branch: "main",
-                        url: "https://github.com/sanjay7709/testing-project.git"
-                    )
-                }
+                gitCheckout(
+                    branch: "main",
+                    url: "https://github.com/sanjay7709/testing-project.git"
+                )
             }
          }
     }
